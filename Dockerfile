@@ -1,7 +1,7 @@
-FROM alpine:3.2
+FROM ubuntu:17.10
 MAINTAINER Benjamin Halsted <bhalsted@gmail.com>
 
-ENV MOSQUITTO_VERSION 1.4.5
+ENV MOSQUITTO_VERSION 1.4.14
 
 RUN echo 'http://dl-4.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories
 
