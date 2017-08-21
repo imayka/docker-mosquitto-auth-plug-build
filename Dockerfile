@@ -1,4 +1,4 @@
-FROM ubuntu:17.10
+FROM alpine:3.2
 MAINTAINER Benjamin Halsted <bhalsted@gmail.com>
 
 ENV MOSQUITTO_VERSION 1.4.14
@@ -15,6 +15,7 @@ RUN cd /build && tar xvfz mosquitto-${MOSQUITTO_VERSION}.tar.gz && \
 # COMPILE AUTH MODULE WITH REDIS & POSTGRES
 RUN cd /build && git clone https://github.com/jpmens/mosquitto-auth-plug.git && \
     cd /build/mosquitto-auth-plug && cp config.mk.in config.mk && \
+    sed -i.bak 's/BACKEND_MONGO \?= yes/BACKEND_MONGO \?= no/' /build/mosquitto-auth-plug/config.mk && \
     sed -i.bak 's/BACKEND_MYSQL \?= yes/BACKEND_MYSQL \?= no/' /build/mosquitto-auth-plug/config.mk && \
     sed -i.bak 's/BACKEND_REDIS \?= no/BACKEND_REDIS \?= yes/' /build/mosquitto-auth-plug/config.mk && \
     sed -i.bak 's/BACKEND_POSTGRES \?= no/BACKEND_POSTGRES \?= yes/' /build/mosquitto-auth-plug/config.mk && \
